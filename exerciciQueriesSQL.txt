@@ -1,0 +1,32 @@
+1. SELECT count(flightID) AS 'Resultat' FROM USAirlineFlights2.Flights;
+
+2. SELECT origin, AVG(ArrDelay) AS 'prom_arribades', AVG(DepDelay) AS 'prom_sortides'
+FROM `USAirlineFlights2`.`Flights`
+GROUP BY origin;
+
+3. SELECT origin, AVG(ArrDelay) AS 'prom_arribades', colMonth, colYear
+FROM `USAirlineFlights2`.`Flights`
+GROUP BY origin, colYear, colMonth, 'prom_arribades'
+ORDER BY origin;
+
+4. SELECT city, AVG(ArrDelay) AS 'prom_arribades', colMonth, colYear
+FROM `USAirlineFlights2`.`USAirports`
+INNER JOIN `USAirlineFlights2`.`Flights`
+ON `USAirlineFlights2`.`USAirports`.iata = `USAirlineFlights2`.`Flights`.UniqueCarrier
+GROUP BY colMonth, colYear, 'prom_arribades', city
+ORDER BY city; 
+
+5. SELECT AVG (CancellationCode) AS 'total_cancelled', colYear, colMonth, UniqueCarrier
+FROM `USAirlineFlights2`.`Flights`
+GROUP BY UniqueCarrier, colYear, colMonth, 'total_cancelled'
+ORDER BY 'total_cancelled' DESC;
+
+6. SELECT TailNum, Distance
+FROM `USAirlineFlights2`.`Flights`
+ORDER BY Distance DESC LIMIT 10;
+
+7. SELECT UniqueCarrier, AVG(ArrDelay)
+FROM `USAirlineFlights2`.`Flights`
+WHERE ArrDelay > 10
+GROUP BY UniqueCarrier
+ORDER BY avg(ArrDelay) DESC;
